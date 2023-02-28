@@ -1,7 +1,6 @@
 import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
 import React, { useContext, useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import { db } from '../../config/firebase-config'
+import { auth, db } from '../../config/firebase-config'
 import { MainContext } from '../context/MainContext'
 
 
@@ -11,9 +10,16 @@ const Home = () => {
 
 
   const [notesStorage, setNotesStorage] = useState([])
-  const [openMenu, setOpenMenu] = useState(false)
 
-  const [editNoteModal, setEditNoteModal] = useState(false)
+  const [openMenu, setOpenMenu] = useState({
+    id: null,
+    decider: false
+  })
+
+  const [editNoteModal, setEditNoteModal] = useState({
+    id: null,
+    decider: false
+  })
 
   const {storeFilteredData} = useContext(MainContext)
 
@@ -22,13 +28,27 @@ const Home = () => {
     body: "",
   })
 
-  const getNotes = async () => {
+  const getNotes = async (id) => {
     try{
       const data = await getDocs(notesCollectionRef)
       const notess = data.docs.map((note) => ({
         ...note.data(), id: note.id
       }))
-      setNotesStorage(notess)
+
+      const filteredNotes = notess.filter(
+        (note) => note.userID === auth.currentUser.uid
+      );
+
+      setNotesStorage(filteredNotes)
+
+      const currentNote = filteredNotes.find((note) => note.id === id)
+
+      if(currentNote){
+        setUpdatedNotes({
+          title: currentNote.title,
+          body: currentNote.body,
+        });
+      }
 
       console.log(notesStorage)
     } catch(err){
@@ -41,6 +61,7 @@ const Home = () => {
       const noteDoc = doc(db, "notes", id)
       await deleteDoc(noteDoc)
       console.log('note deleted', id)
+      getNotes();
     } catch (err){
       console.error(err)
     }
@@ -49,16 +70,47 @@ const Home = () => {
   const updateNote = async (id) => {
     try{
       const noteDoc = doc(db, "notes", id)
-      await updateDoc(noteDoc)
+      await updateDoc(noteDoc, {
+        title: updatedNotes.title,
+        body: updatedNotes.body,
+      })
+      setEditNoteModal({
+        decider: false
+      })
+
+      getNotes();
     } catch (err){
       console.error(err)
     }
   }
 
+
   useEffect(() => {
+    console.log(notesStorage)
     getNotes()
   }, [])
   
+
+  const toggleEditMenu = (id) => {
+    if(id === id){
+      setOpenMenu({
+        id: id,
+        decider: !openMenu.decider
+      })
+    }
+  }
+
+  const toggleEditModal = (id) => {
+    if(id === id){
+      setEditNoteModal({
+        id: id,
+        decider: !editNoteModal.decider
+      })
+      getNotes(id)
+
+    }
+
+  }
 
   return (
       <div className='home__dashboard__container'>
@@ -69,26 +121,27 @@ const Home = () => {
           {notesStorage && notesStorage.map((note) => {
             return (
               <div className='notes__individual__container' key={note.id}>
-                <button onClick={() => setOpenMenu(!openMenu)}>edit</button>
-                {openMenu && 
+                <button onClick={() => toggleEditMenu(note.id)}>edit</button>
+                {openMenu.decider && openMenu.id === note.id && 
                 <div>
                   <button onClick={() => deleteNote(note.id)}>delete</button>
-                  <button onClick={() => setEditNoteModal(!editNoteModal)}>edit note</button>
+                  <button onClick={() => toggleEditModal(note.id)}>edit note</button>
                 </div>}
                 <h1>{note.title}</h1>
                 <p>{note.body}</p>
                 <span>tags tempo</span>
 
-                {editNoteModal && 
+                  {editNoteModal.decider && editNoteModal.id === note.id && 
                   <div>
-                    <input type="text" onChange={(e) => setUpdatedNotes({
+                    <input type="text" defaultValue={note.title} onChange={(e) => setUpdatedNotes({
                       ...updatedNotes,
                       title: e.target.value,
                     })}/>
-                    <input type="text" onChange={(e) => setUpdatedNotes({
+                    <textarea cols="30" rows="10" defaultValue={note.body} onChange={(e) => setUpdatedNotes({
                       ...updatedNotes,
                       body: e.target.value,
-                    })}/>
+                    })}></textarea>
+                    <button onClick={() => updateNote(note.id)}>update</button>
                   </div>}
               </div>
             )
