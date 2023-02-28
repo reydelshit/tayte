@@ -1,9 +1,14 @@
 import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { auth, db } from '../../config/firebase-config'
 
 
 const useCrud = () => {
+
+    useEffect(() => {
+        getNotes()
+    }, [])
+    
 
     const notesCollectionRef = collection(db, "notes")
     const [notesStorage, setNotesStorage] = useState([])
@@ -27,9 +32,7 @@ const useCrud = () => {
         const filteredNotes = notess.filter(
           (note) => note.userID === auth.currentUser.uid
         );
-    
-        setNotesStorage(filteredNotes)
-    
+            
         const currentNote = filteredNotes.find((note) => note.id === id)
     
         if(currentNote){
@@ -38,8 +41,9 @@ const useCrud = () => {
             body: currentNote.body,
           });
         }
-    
-        console.log(notesStorage)
+        console.log(filteredNotes)
+        setNotesStorage(filteredNotes)
+
       } catch(err){
         console.error(err)
       }

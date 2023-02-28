@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { MainContext } from '../context/MainContext'
 import useCrud from '../hooks/useCrud'
 
@@ -14,13 +14,6 @@ const Home = () => {
     decider: false
   })
 
-
-
-  useEffect(() => {
-    console.log(notesStorage)
-    getNotes()
-  }, [])
-  
 
   const toggleEditMenu = (id) => {
     if(id === id){
