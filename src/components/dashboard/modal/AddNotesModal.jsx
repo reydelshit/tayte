@@ -1,34 +1,33 @@
-import React, { useContext, useState } from 'react'
-import { MainContext } from '../../context/MainContext'
-
-import { db,auth } from '../../../config/firebase-config'
 import { addDoc, collection } from 'firebase/firestore'
+import React, { useContext, useState } from 'react'
+import { auth, db } from '../../../config/firebase-config'
+import { MainContext } from '../../context/MainContext'
 
 const AddNotesModal = () => {
 
-  const {showAddModal, setShowAddModal} = useContext(MainContext)
-
+  const {showAddModal, setShowAddModal, getNotes} = useContext(MainContext)
+    
   const [notes, setNotes] = useState({
     title: "",
     body: "",
   })
 
+  const notesCollectionRef = collection(db, "notes")
 
-  const noteCollectionRef = collection(db, "notes")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     if(notes.title && notes.body !== ""){
         try{
-            await addDoc(noteCollectionRef, {
+            await addDoc(notesCollectionRef, {
                 title: notes.title,
                 body: notes.body,
                 userID: auth?.currentUser?.uid
             }).then((note) => {
                 console.log("note added", note.id)
                 setShowAddModal(false)
-                
+                getNotes();
             })
     
             console.log(auth.currentUser)
