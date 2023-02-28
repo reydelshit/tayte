@@ -1,0 +1,75 @@
+.singup__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+
+    width: 40%;
+    height: 60%;
+
+    border: 1px solid orange;
+}
+
+.signup__inputs__container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 5rem 5rem 5rem;
+    
+    place-content: center;
+    place-items: center;
+
+    width: 100%;
+    /* height: 100%; */
+
+    border: 1px solid orange;
+
+}
+.singup__container input{
+
+    width: 80%;
+    height: 3rem;
+    padding-left: 0.5rem;
+    /* margin-bottom: 1.5rem; */
+
+    border: 1px solid orange;
+}
+
+.singup__buttons__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem;
+
+    border: 1px solid orange;
+}
+
+.singup__buttons__container button{
+    
+    width: 10rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    background: none;
+    border: none;
+    background-color: aqua;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+}
+
+.singup__buttons__container span{
+    color: gray;
+    
+    font-size: 0.8rem;
+}
+
+
+.singup__buttons__container a{
+    color: black;
+    text-decoration: underline;
+
+    /* cursor: pointer; */
+}

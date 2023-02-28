@@ -1,18 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-.main__container{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border: 1px solid orange;
-}
 
 .login__container{
     display: flex;
@@ -96,9 +82,4 @@
 
     /* cursor: pointer; */
 }
-
-
-
-
-
 

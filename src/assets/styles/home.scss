@@ -1,0 +1,29 @@
+.home__dashboard__container{
+    @extend .forContainer;
+
+
+    display: flex;
+    flex-direction: column;
+
+    .greeting__container{
+        padding: 18px 0;
+        text-align: left;
+        border: 1px solid green;
+        height: 6rem;
+    }
+
+    .notes__container{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        padding: 1rem 0;
+
+        .notes__individual__container{
+            width: 20rem;
+            height: 15rem;
+            padding: 5px;
+            border: 1px solid green;
+            overflow-wrap: break-word;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+.sidebar__addnotes{
+    display: grid;
+    place-items: center;
+    align-self: center;
+    border-radius: 5px;
+    width: 90%;
+    height: 3rem;
+    border: none;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: rgb(164, 69, 237);
+    color: white;
+
+    &:hover{
+        background-color: rgb(177, 96, 240);
+    }
+}

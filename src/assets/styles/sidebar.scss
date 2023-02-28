@@ -1,0 +1,14 @@
+.sidebar__container{
+    display: flex;
+    flex-direction: column;
+    // padding: 0.5rem;
+    width: 20rem;
+    height: 100%;
+    border: 1px solid green;
+
+
+}
+
+@import './store/sidebar/profile';
+@import './store/sidebar/addnotes';
+@import './store/sidebar/navigation';

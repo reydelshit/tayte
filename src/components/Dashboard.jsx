@@ -1,42 +1,49 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth } from '../config/firebase-config'
+import { auth} from '../config/firebase-config'
+
+import Home from './dashboard/Home';
+import useUserDetails from './hooks/useUserDetails';
+import { MainContext } from './context/MainContext';
+import SideBar from './dashboard/SideBar';
+import AddNotesModal from './dashboard/modal/AddNotesModal';
 
 
 
 const Dashboard = () => {
 
-    const navigate = useNavigate()
-    const [user, setUser] = useState(null);
+  const navigate = useNavigate()
+  const {getUserDetails} = useUserDetails();
 
-    useEffect(() => {
-        const listen = onAuthStateChanged(auth, (user) => {
-            if(user){
-                setUser(user)
-                console.log(user)
-            } else {
-                navigate('/');
+  const {storeFilteredData, setStoreFilteredData} = useContext(MainContext)
+
+  
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, async (user) => {
+        if(user){
+            if(user.email !== null){
+              await getUserDetails(user.email).then((userDetails) => {
+                setStoreFilteredData(userDetails)
+                // console.log(storeFilteredData)
+              })
             }
-          })
-    
-          return() => {
-            listen();
-          }
-    }, [navigate])
-
-    const logOut = async () => {
-        try{
-            await signOut(auth)
-          } catch (err){
-            console.error(err)
+        } else {
+            navigate('/');
         }
-    }
+      })
+
+      return() => {
+        listen();
+      }
+
+}, [navigate])
   return (
-    <div>Dashboard
-        {/* <h1>{user.displayName}</h1> */}
-        <button onClick={logOut}>logout</button>
+    <div className='dashboard__container'>
+      <SideBar />
+        <Outlet />
+      <AddNotesModal />
     </div>
   )
 }
