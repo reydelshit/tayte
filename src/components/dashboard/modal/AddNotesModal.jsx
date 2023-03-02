@@ -2,13 +2,10 @@ import { addDoc, collection } from 'firebase/firestore'
 import React, { useContext, useEffect, useState } from 'react'
 import { auth, db } from '../../../config/firebase-config'
 import { MainContext } from '../../context/MainContext'
-import useCrud from '../../hooks/useCrud'
 
 const AddNotesModal = () => {
 
-  const {showAddModal, setShowAddModal} = useContext(MainContext)
-
-  const {getNotes} = useCrud()
+  const {showAddModal, setShowAddModal, getNotes} = useContext(MainContext)
     
   const [notes, setNotes] = useState({
     title: "",
@@ -30,7 +27,6 @@ const AddNotesModal = () => {
                 console.log("note added", note.id)
                 setShowAddModal(false)
                 getNotes()
-
             })
     
             console.log(auth.currentUser)

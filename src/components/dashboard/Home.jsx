@@ -1,19 +1,60 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { MainContext } from '../context/MainContext'
-import useCrud from '../hooks/useCrud'
-
+import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
+import { auth, db } from '../../config/firebase-config'
+// import { getNotes } from '../getNotes'
 
 const Home = () => {
 
+  const {notesStorage, getNotes, updatedNotes, setUpdatedNotes} = useContext(MainContext)
   const {storeFilteredData} = useContext(MainContext)
 
-  const {getNotes, deleteNote, updateNote, editNoteModal, notesStorage, setEditNoteModal, updatedNotes} = useCrud();
+  const [editNoteModal, setEditNoteModal] = useState({
+    id: null,
+    decider: false
+  })
+
 
   const [openMenu, setOpenMenu] = useState({
     id: null,
     decider: false
   })
+  
 
+  useEffect(() => {
+    getNotes()
+}, [])
+
+
+  
+  const deleteNote = async (id) => {
+    try{
+      const noteDoc = doc(db, "notes", id)
+      await deleteDoc(noteDoc)
+      console.log('note deleted', id)
+      getNotes();
+    } catch (err){
+      console.error(err)
+    }
+  }
+  
+  const updateNote = async (id) => {
+    try{
+      const noteDoc = doc(db, "notes", id)
+      await updateDoc(noteDoc, {
+        title: updatedNotes.title,
+        body: updatedNotes.body,
+      })
+      setEditNoteModal({
+        decider: false
+      })
+  
+      getNotes();
+    } catch (err){
+      console.error(err)
+    }
+  }
+  
 
   const toggleEditMenu = (id) => {
     if(id === id){

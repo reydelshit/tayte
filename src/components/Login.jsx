@@ -15,12 +15,11 @@ const Login = () => {
 
   useEffect(() => {
 
-    if(!auth.currentUser){
-      navigate('/');
-    }
+    // if(!auth.currentUser){
+    //   navigate('/');
+    // }
 
-
-  }, [navigate])
+  }, [])
 
     return (
       <div className='login__container'>
