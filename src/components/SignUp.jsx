@@ -19,7 +19,6 @@ const SignUp = () => {
 
 
     const navigate = useNavigate()
-    notesStorage
     const signUp = async () => {
 
 
