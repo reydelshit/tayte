@@ -20,7 +20,6 @@ const Home = () => {
     decider: false
   })
   
-
   useEffect(() => {
     getNotes()
 }, [])
@@ -80,7 +79,7 @@ const Home = () => {
   return (
       <div className='home__dashboard__container'>
         <div className='greeting__container'>
-          <h1>hello, {storeFilteredData.firstName}</h1>
+          <h1>hello, {storeFilteredData.firstName}!</h1>
         </div>
         <div className='notes__container'>
           {notesStorage && notesStorage.map((note) => {
@@ -94,8 +93,11 @@ const Home = () => {
                 </div>}
                 <h1>{note.title}</h1>
                 <p>{note.body}</p>
-                <span>tags tempo</span>
-
+                  {note.tags && note.tags.map((tag, index) => {
+                    return (
+                      <span key={index}>{tag} </span>
+                    )
+                  })}
                   {editNoteModal.decider && editNoteModal.id === note.id && 
                   <div>
                     <input type="text" defaultValue={note.title} onChange={(e) => setUpdatedNotes({

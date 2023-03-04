@@ -6,10 +6,12 @@ import { MainContext } from '../../context/MainContext'
 const AddNotesModal = () => {
 
   const {showAddModal, setShowAddModal, getNotes} = useContext(MainContext)
-    
+
+  const [tags, setTags] = useState('')
   const [notes, setNotes] = useState({
     title: "",
     body: "",
+    tags: []
   })
 
   const notesCollectionRef = collection(db, "notes")
@@ -22,10 +24,16 @@ const AddNotesModal = () => {
             await addDoc(notesCollectionRef, {
                 title: notes.title,
                 body: notes.body,
+                tags: notes.tags,
                 userID: auth?.currentUser?.uid
             }).then((note) => {
                 console.log("note added", note.id)
                 setShowAddModal(false)
+                setNotes({
+                    title: "",
+                    body: "",
+                    tags: []
+                })
                 getNotes()
             })
     
@@ -39,6 +47,17 @@ const AddNotesModal = () => {
         console.log('textfield must not be empty')
     }
 
+  }
+
+  const handleInput = (e) => {
+    if(e.key === "Enter"){
+        setNotes({
+            ...notes,
+            tags: [...notes.tags, tags]
+        })
+        console.log(tags)
+        setTags('')
+    }
   }
 
 
@@ -62,6 +81,7 @@ const AddNotesModal = () => {
                             body: e.target.value
                         })} required>
                     </textarea>
+                    <input type="text" value={tags} onKeyDown={handleInput} onChange={(e) => setTags(e.target.value)}/>
                     
                     <button onClick={cancelButton}>Cancel</button>
                     <button onClick={handleSubmit}>Submit</button>
