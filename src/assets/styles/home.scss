@@ -17,6 +17,7 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 1rem;
         padding: 1rem 0;
+        width: 100%;
 
         .notes__individual__container{
             width: 20rem;
@@ -24,6 +25,62 @@
             padding: 5px;
             border: 1px solid green;
             overflow-wrap: break-word;
+            position: relative;
+
+            .notes__individual__header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 0.8rem;
+                margin-bottom: 1rem;
+                height: 2.5rem;
+
+                border: 1px solid blue;
+
+                .edit__icon{
+                    padding-bottom: 50px;
+
+                    background: none;
+                    width: 2rem;
+                    height: 100%;
+                    font-size: 1.5rem;
+                    text-align: center;
+                    border: none;
+                    cursor: pointer;
+
+                    // border: 1px solid green !important;
+                }
+
+                .notes__individual__header__togglemenu{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    width: 8rem;
+                    height: 4rem;
+                    border: 1px solid green;
+
+                    position: absolute;
+                    right: 30px;
+                    top: 40px;
+
+                    button{
+                        width: 70%;
+                    }
+
+                }
+            }
+
+            h1{
+                font-size: 1.4rem;
+                font-weight: 500;
+                margin-bottom: 1rem;
+            }
+
+            p{
+                font-size: 0.8rem;
+                font-weight: 300;
+            }
         }
     }
 }

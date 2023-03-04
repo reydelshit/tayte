@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { MainContext } from '../context/MainContext'
 import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
 import { auth, db } from '../../config/firebase-config'
+import Notes from './Notes'
 // import { getNotes } from '../getNotes'
 
 const Home = () => {
@@ -76,20 +77,6 @@ const Home = () => {
 
   }
 
-  // const handleGithub = async () => {
-  //   const auths = await fetch("https://github.com/login/oauth/authorize", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json",
-  //       "Access-Control-Allow-Origin": "*",
-  //       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  //     }
-  //   });
-  //   const getdada = await auths.json();
-
-  //   console.log(getdada)
-  // }
 
   return (
       <div className='home__dashboard__container'>
@@ -97,46 +84,17 @@ const Home = () => {
           <h1>hello, {storeFilteredData.firstName}!</h1>
         </div>
 
-        <button><a href="https://github.com/login/oauth/authorize" target="_blank" rel="noopener noreferrer">connect to github</a></button>
-        <div className='notes__container'>
-          {notesStorage && notesStorage.map((note) => {
-            return (
-              <div className='notes__individual__container' key={note.id}>
-                <button onClick={() => toggleEditMenu(note.id)}>edit</button>
-                {openMenu.decider && openMenu.id === note.id && 
-                <div>
-                  <button onClick={() => deleteNote(note.id)}>delete</button>
-                  <button onClick={() => toggleEditModal(note.id)}>edit note</button>
-                </div>}
-
-                <div>
-                  <span>
-                    {note.dateCreated}
-                  </span>
-                </div>
-                <h1>{note.title}</h1>
-                <p>{note.body.slice(0, 120)}...</p>
-                  {note.tags && note.tags.map((tag, index) => {
-                    return (
-                      <span key={index}>{tag} </span>
-                    )
-                  })}
-                  {editNoteModal.decider && editNoteModal.id === note.id && 
-                  <div>
-                    <input type="text" defaultValue={note.title} onChange={(e) => setUpdatedNotes({
-                      ...updatedNotes,
-                      title: e.target.value,
-                    })}/>
-                    <textarea cols="30" rows="10" defaultValue={note.body} onChange={(e) => setUpdatedNotes({
-                      ...updatedNotes,
-                      body: e.target.value,
-                    })}></textarea>
-                    <button onClick={() => updateNote(note.id)}>update</button>
-                  </div>}
-              </div>
-            )
-          })}
-        </div>
+        {/* <button><a href="https://github.com/login/oauth/authorize" target="_blank" rel="noopener noreferrer">connect to github</a></button> */}
+       <Notes 
+        notesStorage={notesStorage} 
+        deleteNote={deleteNote} 
+        updatedNotes={updatedNotes} 
+        updateNote={updateNote}
+        toggleEditMenu={toggleEditMenu} 
+        toggleEditModal={toggleEditModal} 
+        setUpdatedNotes={setUpdatedNotes} 
+        openMenu={openMenu} 
+        editNoteModal={editNoteModal}/>
       </div>
   )
 }
