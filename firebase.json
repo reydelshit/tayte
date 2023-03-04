@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "./dist/index.html",
+    "public": ".",
     "rewrites": [
       {
         "source": "**",
