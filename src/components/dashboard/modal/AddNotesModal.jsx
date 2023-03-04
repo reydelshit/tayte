@@ -1,4 +1,4 @@
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, Firestore } from 'firebase/firestore'
 import React, { useContext, useEffect, useState } from 'react'
 import { auth, db } from '../../../config/firebase-config'
 import { MainContext } from '../../context/MainContext'
@@ -7,7 +7,7 @@ const AddNotesModal = () => {
 
   const {showAddModal, setShowAddModal, getNotes} = useContext(MainContext)
 
-  const [tags, setTags] = useState('')
+  const [tags, setTags] = useState(' ')
   const [notes, setNotes] = useState({
     title: "",
     body: "",
@@ -20,12 +20,15 @@ const AddNotesModal = () => {
   const handleSubmit = async () => {
 
     if(notes.title && notes.body !== ""){
+
+        const currentDate = new Date();
         try{
             await addDoc(notesCollectionRef, {
                 title: notes.title,
                 body: notes.body,
                 tags: notes.tags,
-                userID: auth?.currentUser?.uid
+                userID: auth?.currentUser?.uid,
+                dateCreated: currentDate.toDateString()
             }).then((note) => {
                 console.log("note added", note.id)
                 setShowAddModal(false)
@@ -81,6 +84,7 @@ const AddNotesModal = () => {
                             body: e.target.value
                         })} required>
                     </textarea>
+                    <span>{notes.tags.join(" ")}</span>
                     <input type="text" value={tags} onKeyDown={handleInput} onChange={(e) => setTags(e.target.value)}/>
                     
                     <button onClick={cancelButton}>Cancel</button>

@@ -116,8 +116,6 @@ function App() {
 
 
 
-  
-
   return (
     <MainContext.Provider value={{
     signInWithGoogle, signIn, setEmail, setPassword, 

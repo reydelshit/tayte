@@ -76,11 +76,28 @@ const Home = () => {
 
   }
 
+  // const handleGithub = async () => {
+  //   const auths = await fetch("https://github.com/login/oauth/authorize", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json",
+  //       "Access-Control-Allow-Origin": "*",
+  //       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  //     }
+  //   });
+  //   const getdada = await auths.json();
+
+  //   console.log(getdada)
+  // }
+
   return (
       <div className='home__dashboard__container'>
         <div className='greeting__container'>
           <h1>hello, {storeFilteredData.firstName}!</h1>
         </div>
+
+        <button><a href="https://github.com/login/oauth/authorize" target="_blank" rel="noopener noreferrer">connect to github</a></button>
         <div className='notes__container'>
           {notesStorage && notesStorage.map((note) => {
             return (
@@ -91,6 +108,12 @@ const Home = () => {
                   <button onClick={() => deleteNote(note.id)}>delete</button>
                   <button onClick={() => toggleEditModal(note.id)}>edit note</button>
                 </div>}
+
+                <div>
+                  <span>
+                    {note.dateCreated}
+                  </span>
+                </div>
                 <h1>{note.title}</h1>
                 <p>{note.body.slice(0, 120)}...</p>
                   {note.tags && note.tags.map((tag, index) => {
