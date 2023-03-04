@@ -92,7 +92,7 @@ const Home = () => {
                   <button onClick={() => toggleEditModal(note.id)}>edit note</button>
                 </div>}
                 <h1>{note.title}</h1>
-                <p>{note.body}</p>
+                <p>{note.body.slice(0, 120)}...</p>
                   {note.tags && note.tags.map((tag, index) => {
                     return (
                       <span key={index}>{tag} </span>
