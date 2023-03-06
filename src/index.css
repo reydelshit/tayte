@@ -1,0 +1,48 @@
+/* @import './assets/styles/config/_fonts.scss';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $poppins;
+
+}
+
+body{
+    overflow-x: hidden;
+}
+
+@import './assets//styles/main.scss';
+
+@import './assets/styles/login.scss';
+@import './assets/styles/signup.scss';
+
+// main compotent 
+@import './assets/styles/dashboard.scss';
+@import './assets//styles/sidebar.scss';
+@import './assets/styles/home.scss';
+
+
+@import './assets/styles/addnotemodal.scss';
+
+// views 
+@import './assets/styles/notes.scss';
+@import './assets/styles/tasks.scss';
+@import './assets/styles/notedetails.scss';
+
+@import './assets/styles/config/container.scss'; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input-login {
+  @apply w-full h-12 border border-gray-300 rounded-lg p-2 mb-5 text-sm text-gray-600 outline-none;
+}
+
+.input-signup {
+  @apply h-12 border border-gray-300 rounded-lg p-2 mb-5 text-sm text-gray-600 outline-none;
+}
+.button {
+  @apply bg-violet-500 w-52 h-10 mt-2 rounded-md text-white font-semibold hover:bg-violet-400;
+}

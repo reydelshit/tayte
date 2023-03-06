@@ -1,13 +1,17 @@
-import React, { useContext, useState } from 'react'
-import { MainContext } from '../../context/MainContext'
+import React, { useContext, useState } from 'react';
+import { MainContext } from '../../context/MainContext';
 
 const AddNotes = () => {
+  const { showAddModal, setShowAddModal } = useContext(MainContext);
 
-  const {showAddModal, setShowAddModal} = useContext(MainContext)
-  
   return (
-    <button onClick={() => setShowAddModal(!showAddModal)} className='sidebar__addnotes'>AddNotes</button>
-  )
-}
+    <button
+      onClick={() => setShowAddModal(!showAddModal)}
+      className="button grid self-center items-center my-4"
+    >
+      Add Notes
+    </button>
+  );
+};
 
-export default AddNotes
+export default AddNotes;
