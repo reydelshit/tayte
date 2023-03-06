@@ -22,8 +22,15 @@ const Home = () => {
 
   return (
     <div className="w-full border-2 border-violet-500">
-      <div className="greeting__container">
-        <h1>hello, {storeFilteredData.firstName}!</h1>
+      <div className="h-16 text-start mt-7 p-1">
+        <h1 className="text-3xl font-bold">
+          hello,{' '}
+          <span className="text-violet-500">
+            {' '}
+            {storeFilteredData.firstName}
+          </span>
+          !
+        </h1>
       </div>
       <Notes
         notesStorage={notesStorage}

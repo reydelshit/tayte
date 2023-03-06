@@ -7,7 +7,7 @@ import Profile from './sidebar/Profile';
 
 const SideBar = () => {
   return (
-    <div className="flex flex-col h-full w-60 border-r-2 border-violet-500">
+    <div className="flex flex-col h-full w-60 ">
       <Profile />
       <AddNotesButton />
       <Navigation />

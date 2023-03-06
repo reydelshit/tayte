@@ -35,7 +35,7 @@ const Dashboard = () => {
     };
   }, [navigate]);
   return (
-    <div className="flex h-full w-screen">
+    <div className="relative flex h-full w-screen">
       <SideBar />
       <Outlet />
       <AddNotesModal />
