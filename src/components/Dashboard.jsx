@@ -9,6 +9,7 @@ import useUserDetails from './hooks/useUserDetails';
 import { MainContext } from './context/MainContext';
 import SideBar from './dashboard/SideBar';
 import AddNotesModal from './dashboard/modal/AddNotesModal';
+import SideBarRight from './dashboard/SideBarRight';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ const Dashboard = () => {
     <div className="relative flex h-full w-screen">
       <SideBar />
       <Outlet />
+      <SideBarRight />
       <AddNotesModal />
     </div>
   );

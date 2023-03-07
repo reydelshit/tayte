@@ -9,9 +9,9 @@ const Menu = ({ deleteNote, toggleMenu, id }) => {
         ...
       </button>
       {openMenu.decider && openMenu.id === id && (
-        <div className="notes__individual__header__togglemenu">
-          <button onClick={() => deleteNote(id)}>delete</button>
+        <div className="grid place-content-center rounded-md absolute right-10 top-12 w-24 h-20 p-2 border-2 bg-violet-100 border-violet-500">
           <button onClick={() => toggleEditModal(id)}>edit note</button>
+          <button onClick={() => deleteNote(id)}>delete</button>
         </div>
       )}
     </>

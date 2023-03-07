@@ -36,6 +36,9 @@ body{
 @tailwind components;
 @tailwind utilities;
 
+body {
+  overflow-x: hidden;
+}
 .input-login {
   @apply w-full h-12 border border-gray-300 rounded-lg p-2 mb-5 text-sm text-gray-600 outline-none;
 }
@@ -45,4 +48,32 @@ body{
 }
 .button {
   @apply bg-violet-500 w-52 h-10 mt-2 rounded-md text-white font-semibold hover:bg-violet-400;
+}
+
+.note-tags .bg-red-400 {
+  background-color: #ef4444;
+}
+
+.note-tags .bg-yellow-400 {
+  background-color: #f59e0b;
+}
+
+.note-tags .bg-green-400 {
+  background-color: #10b981;
+}
+
+.note-tags .bg-blue-400 {
+  background-color: #3b82f6;
+}
+
+.note-tags .bg-indigo-400 {
+  background-color: #6366f1;
+}
+
+.note-tags .bg-purple-400 {
+  background-color: #8b5cf6;
+}
+
+.note-tags .bg-pink-400 {
+  background-color: #ec4899;
 }

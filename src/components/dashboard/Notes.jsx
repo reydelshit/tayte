@@ -66,12 +66,12 @@ const Notes = (props) => {
   };
 
   return (
-    <div className="grid grid-cols-4 p-2 gap-2">
+    <div className="grid grid-cols-3 p-2 gap-5 h-full overflow-x-hidden">
       {notesStorage &&
         notesStorage.map((note) => {
           return (
             <div
-              className="text-start break-words w-80 h-72 p-4 bg-violet-50 rounded-md border-2 border-violet-500"
+              className="relative text-start break-words w-80 h-72 p-4 bg-violet-50 rounded-md border-2 border-violet-500"
               key={note.id}
             >
               <div className="flex justify-between text-sm text-gray-500 mb-3">
@@ -87,19 +87,23 @@ const Notes = (props) => {
               <h1 className="text-2xl font-semibold mb-2">
                 <Link to={`/dashboard/notes/${note.id}`}>{note.title}</Link>
               </h1>
-              <p className="break-all mb-5">{note.body.slice(0, 120)}...</p>
-              {note.tags &&
-                note.tags.map((tag, index) => {
-                  const randomColor = getRandomColor();
-                  return (
-                    <span
-                      className={`${randomColor.bg} px-4 py-2 rounded-md text-xs mr-2 font-semibold ${randomColor.text}`}
-                      key={index}
-                    >
-                      {tag}{' '}
-                    </span>
-                  );
-                })}
+              <p className="break-all h-24 my-4">
+                {note.body.slice(0, 120)}...
+              </p>
+              <div className="flex overflow-hidden w-full h-12 p-2 gap-2">
+                {note.tags &&
+                  note.tags.map((tag, index) => {
+                    const randomColor = getRandomColor();
+                    return (
+                      <span
+                        className={`${randomColor.bg} w-full h-8 p-2 grid place-content-center text-center m-auto rounded-md text-xs font-semibold6 ${randomColor.text}`}
+                        key={index}
+                      >
+                        {tag}{' '}
+                      </span>
+                    );
+                  })}
+              </div>
 
               <EditModal
                 noteID={note.id}

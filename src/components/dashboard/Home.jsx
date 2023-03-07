@@ -21,7 +21,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="w-full border-2 border-violet-500">
+    <div className="w-full h-fit border-2 border-violet-500">
       <div className="h-16 text-start mt-7 p-1">
         <h1 className="text-3xl font-bold">
           hello,{' '}
