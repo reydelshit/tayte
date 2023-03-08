@@ -66,7 +66,7 @@ const Notes = (props) => {
   };
 
   return (
-    <div className="grid grid-cols-3 p-2 gap-5 h-full overflow-x-hidden">
+    <div className="grid grid-cols-3 p-2 gap-5 mt-10 overflow-x-hidden">
       {notesStorage &&
         notesStorage.map((note) => {
           return (
@@ -84,7 +84,7 @@ const Notes = (props) => {
                 />
               </div>
 
-              <h1 className="text-2xl font-semibold mb-2">
+              <h1 className="text-2xl font-semibold mb-2 hover:text-violet-500">
                 <Link to={`/dashboard/notes/${note.id}`}>{note.title}</Link>
               </h1>
               <p className="break-all h-24 my-4">

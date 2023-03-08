@@ -7,7 +7,7 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 
 import Home from './components/dashboard/Home';
-import Notes from './components/dashboard/pages/Notes';
+import Note from './components/dashboard/pages/Note';
 import Tasks from './components/dashboard/pages/Tasks';
 import NotesDetails from './components/dashboard/pages/NotesDetails';
 
@@ -206,7 +206,7 @@ function App() {
           <Route path="/dashboard/signup/:id" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />}>
             <Route path="/dashboard" element={<Home />} />
-            <Route path="/dashboard/notes" element={<Notes />} />
+            <Route path="/dashboard/notes" element={<Note />} />
             <Route path="/dashboard/notes/:id" element={<NotesDetails />} />
             <Route path="/dashboard/tasks" element={<Tasks />} />
           </Route>
