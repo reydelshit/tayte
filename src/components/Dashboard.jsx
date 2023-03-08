@@ -4,11 +4,10 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../config/firebase-config';
 
-import Home from './dashboard/Home';
-import useUserDetails from './hooks/useUserDetails';
-import { MainContext } from './context/MainContext';
+import useUserDetails from '../hooks/useUserDetails';
+import { MainContext } from '../context/MainContext';
 import SideBar from './dashboard/SideBar';
-import AddNotesModal from './dashboard/modal/AddNotesModal';
+import AddNotesModal from './modal/AddNotesModal';
 import SideBarRight from './dashboard/SideBarRight';
 
 const Dashboard = () => {

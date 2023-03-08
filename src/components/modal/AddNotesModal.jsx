@@ -1,6 +1,6 @@
 import { addDoc, collection, Firestore } from 'firebase/firestore';
 import React, { useContext, useEffect, useState } from 'react';
-import { auth, db } from '../../../config/firebase-config';
+import { auth, db } from '../../config/firebase-config';
 import { MainContext } from '../../context/MainContext';
 
 const AddNotesModal = () => {

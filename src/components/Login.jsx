@@ -2,7 +2,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../config/firebase-config';
-import { MainContext } from './context/MainContext';
+import { MainContext } from '../context/MainContext';
 
 const Login = () => {
   const { signInWithGoogle, signIn, setEmail, setPassword } =

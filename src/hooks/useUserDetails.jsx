@@ -1,6 +1,6 @@
 import { getDocs, collection } from 'firebase/firestore';
 import { useState } from 'react';
-import { db } from '../../config/firebase-config';
+import { db } from '../config/firebase-config';
 
 const useUserDetails = () => {
   const [storeFilteredData, setStoreFilteredData] = useState([]);

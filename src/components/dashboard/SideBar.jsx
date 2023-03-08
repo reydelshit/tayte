@@ -1,9 +1,9 @@
 import React from 'react';
 
 import Logout from './Logout';
-import AddNotesButton from './sidebar/AddNotesButton';
-import Navigation from './sidebar/Navigation';
-import Profile from './sidebar/Profile';
+import AddNotesButton from '../modal/AddNotesModal';
+import Navigation from '../sidebar/Navigation';
+import Profile from '../sidebar/Profile';
 
 const SideBar = () => {
   return (

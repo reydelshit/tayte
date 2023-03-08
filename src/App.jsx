@@ -7,13 +7,13 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 
 import Home from './components/dashboard/Home';
-import Note from './components/dashboard/pages/Note';
-import Tasks from './components/dashboard/pages/Tasks';
-import NotesDetails from './components/dashboard/pages/NotesDetails';
+import Note from './components/pages/Note';
+import Tasks from './components/pages/Tasks';
+import NotesDetails from './components/pages/NotesDetails';
 
-import { MainContext } from './components/context/MainContext';
+import { MainContext } from './context/MainContext';
 
-import useUserDetails from './components/hooks/useUserDetails';
+import useUserDetails from './hooks/useUserDetails';
 import {
   collection,
   deleteDoc,
@@ -123,6 +123,7 @@ function App() {
 
         console.log(filteredNotes);
         setNotesStorage(filteredNotes);
+        setStoreFiltered(filteredNotes);
       }
     } catch (err) {
       console.error(err);

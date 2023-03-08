@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { MainContext } from '../context/MainContext';
-import Notes from './Notes';
+import { MainContext } from '../../context/MainContext';
+import Notes from './NotesDashboard';
 
 import { AiOutlineFileText } from 'react-icons/ai';
 // import { getNotes } from '../getNotes'

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { MdTaskAlt } from 'react-icons/md';
@@ -12,10 +12,6 @@ const Navigation = () => {
     useContext(MainContext);
 
   const handleSearch = (target) => {
-    if (target === '') {
-      setStoreFiltered(notesStorage);
-      return;
-    }
     const filteredSearch = notesStorage.filter((note) =>
       note.title.toLowerCase().includes(target.toLowerCase())
     );
