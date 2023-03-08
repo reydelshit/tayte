@@ -6,10 +6,8 @@ import Menu from './notes/Menu';
 import EditModal from './modal/EditModal';
 
 const Notes = (props) => {
-  const { deleteNote, toggleEditModal, toggleEditMenu, editNoteModal } =
+  const { deleteNote, toggleEditModal, toggleEditMenu, storeFiltered } =
     useContext(MainContext);
-
-  const { notesStorage } = props;
 
   // const getRandomColor = () => {
   //   const letters = '0123456789ABCDEF';
@@ -67,8 +65,8 @@ const Notes = (props) => {
 
   return (
     <div className="grid grid-cols-3 p-2 gap-5 mt-10 overflow-x-hidden">
-      {notesStorage &&
-        notesStorage.map((note) => {
+      {storeFiltered.length > 0 &&
+        storeFiltered.map((note) => {
           return (
             <div
               className="relative text-start break-words w-80 h-72 p-4 bg-violet-50 rounded-md border-2 border-violet-500"

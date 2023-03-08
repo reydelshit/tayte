@@ -57,6 +57,8 @@ function App() {
     decider: false,
   });
 
+  const [storeFiltered, setStoreFiltered] = useState([]);
+
   useEffect(() => {
     const checkIfLoggedIn = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -197,6 +199,8 @@ function App() {
         toggleEditModal,
         openMenu,
         editNoteModal,
+        storeFiltered,
+        setStoreFiltered,
       }}
     >
       <div className="flex flex-col items-center justify-center h-screen w-screen text-center">

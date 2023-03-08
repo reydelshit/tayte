@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { MdTaskAlt } from 'react-icons/md';
@@ -8,14 +8,21 @@ import { AiOutlineFileText } from 'react-icons/ai';
 import { MainContext } from '../../context/MainContext';
 
 const Navigation = () => {
-  const { notesStorage, setNotesStorage } = useContext(MainContext);
+  const { notesStorage, storeFiltered, setStoreFiltered } =
+    useContext(MainContext);
 
   const handleSearch = (target) => {
+    if (target === '') {
+      setStoreFiltered(notesStorage);
+      return;
+    }
     const filteredSearch = notesStorage.filter((note) =>
       note.title.toLowerCase().includes(target.toLowerCase())
     );
+    setStoreFiltered(filteredSearch);
 
-    setNotesStorage(filteredSearch);
+    console.log(storeFiltered);
+    // setNotesStorage(filteredSearch);
   };
 
   return (
