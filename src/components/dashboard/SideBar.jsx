@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Logout from './Logout';
-import AddNotesButton from '../modal/AddNotesModal';
+import AddNotesButton from '../sidebar/AddNotesButton';
 import Navigation from '../sidebar/Navigation';
 import Profile from '../sidebar/Profile';
 

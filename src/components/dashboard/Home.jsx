@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { MainContext } from '../../context/MainContext';
-import Notes from './NotesDashboard';
+import NotesDashboard from './NotesDashboard';
 
 import { AiOutlineFileText } from 'react-icons/ai';
 // import { getNotes } from '../getNotes'
@@ -12,7 +12,6 @@ const Home = () => {
     updateNote,
     updatedNotes,
     setUpdatedNotes,
-    toggleEditMenu,
     toggleEditModal,
   } = useContext(MainContext);
 
@@ -37,7 +36,7 @@ const Home = () => {
           <AiOutlineFileText className="mr-2" /> My notes
         </h1>
       </div>
-      <Notes
+      <NotesDashboard
         notesStorage={notesStorage}
         updatedNotes={updatedNotes}
         updateNote={updateNote}

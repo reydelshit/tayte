@@ -4,7 +4,8 @@ import { auth, db } from '../../config/firebase-config';
 import { MainContext } from '../../context/MainContext';
 
 const AddNotesModal = () => {
-  const { showAddModal, setShowAddModal, getNotes } = useContext(MainContext);
+  const { showAddModalNotes, setShowAddModalNotes, getNotes } =
+    useContext(MainContext);
 
   const [tags, setTags] = useState(' ');
   const [notes, setNotes] = useState({
@@ -27,7 +28,7 @@ const AddNotesModal = () => {
           dateCreated: currentDate.toDateString(),
         }).then((note) => {
           console.log('note added', note.id);
-          setShowAddModal(false);
+          setShowAddModalNotes(false);
           setNotes({
             title: '',
             body: '',
@@ -57,12 +58,12 @@ const AddNotesModal = () => {
   };
 
   const cancelButton = () => {
-    setShowAddModal(false);
+    setShowAddModalNotes(false);
   };
 
   return (
     <>
-      {showAddModal && (
+      {showAddModalNotes && (
         <div className="absolute grid items-center place-content-center p-5 h-full w-full border-2 ">
           <div className="flex flex-col items-center justify-center w-[40rem] h-[35rem] border-2 border-violet-500 bg-violet-50">
             <h1 className="mb-5 font-bold text-2xl text-violet-500">

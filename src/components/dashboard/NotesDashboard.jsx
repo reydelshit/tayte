@@ -6,7 +6,7 @@ import Menu from '../notes/Menu';
 import EditModal from '../modal/EditModal';
 import Tags from '../notes/Tags';
 
-const Notes = () => {
+const NotesDashboard = () => {
   const {
     deleteNote,
     toggleEditModal,
@@ -53,4 +53,4 @@ const Notes = () => {
   );
 };
 
-export default Notes;
+export default NotesDashboard;

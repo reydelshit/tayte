@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { MainContext } from '../../../context/MainContext';
 import { AiFillPlusCircle } from 'react-icons/ai';
+import { MainContext } from '../../context/MainContext';
 
 const AddNotes = () => {
-  const { showAddModal, setShowAddModal } = useContext(MainContext);
+  const { showAddModalNotes, setShowAddModalNotes } = useContext(MainContext);
 
   return (
     <button
-      onClick={() => setShowAddModal(!showAddModal)}
+      onClick={() => setShowAddModalNotes(!showAddModalNotes)}
       className="button flex justify-center items-center self-center my-4"
     >
       <AiFillPlusCircle className="font-bold mr-2" />

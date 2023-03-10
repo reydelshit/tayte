@@ -7,9 +7,10 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 
 import Home from './components/dashboard/Home';
-import Note from './components/pages/Note';
 import Tasks from './components/pages/Tasks';
 import NotesDetails from './components/pages/NotesDetails';
+import NotesDashboard from './components/dashboard/NotesDashboard';
+import Notes from './components/pages/Notes';
 
 import { MainContext } from './context/MainContext';
 
@@ -36,7 +37,8 @@ function App() {
   // const { getNotes } = useCrud()
 
   const [notesStorage, setNotesStorage] = useState([]);
-  const [showAddModal, setShowAddModal] = useState(false);
+  const [showAddModalNotes, setShowAddModalNotes] = useState(false);
+  const [showAddTasksModalNotes, setShowAddTasksModalNotes] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -187,8 +189,8 @@ function App() {
         setPassword,
         storeFilteredData,
         setStoreFilteredData,
-        showAddModal,
-        setShowAddModal,
+        showAddModalNotes,
+        setShowAddModalNotes,
         notesStorage,
         setNotesStorage,
         getNotes,
@@ -202,6 +204,8 @@ function App() {
         editNoteModal,
         storeFiltered,
         setStoreFiltered,
+        showAddTasksModalNotes,
+        setShowAddTasksModalNotes,
       }}
     >
       <div className="flex flex-col items-center justify-center h-screen w-screen text-center">
@@ -211,7 +215,7 @@ function App() {
           <Route path="/dashboard/signup/:id" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />}>
             <Route path="/dashboard" element={<Home />} />
-            <Route path="/dashboard/notes" element={<Note />} />
+            <Route path="/dashboard/notes" element={<Notes />} />
             <Route path="/dashboard/notes/:id" element={<NotesDetails />} />
             <Route path="/dashboard/tasks" element={<Tasks />} />
           </Route>
