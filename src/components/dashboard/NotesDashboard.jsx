@@ -31,6 +31,7 @@ const NotesDashboard = () => {
                   toggleMenu={toggleEditMenu}
                   deleteNote={deleteNote}
                   toggleEditModal={toggleEditModal}
+                  title="notes"
                 />
               </div>
 

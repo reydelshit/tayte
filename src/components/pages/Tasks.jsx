@@ -1,48 +1,45 @@
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import React, { useContext, useEffect, useState } from 'react';
 import { auth, db } from '../../config/firebase-config';
 import { MainContext } from '../../context/MainContext';
 import AddTask from '../tasks/AddTask';
+import Menu from '../notes/Menu';
+import EditTaskModal from '../modal/EditTaskModal';
 
 const Tasks = () => {
-  const { task, getTasks } = useContext(MainContext);
+  const { task, getTasks, toggleEditMenu, toggleEditModal } =
+    useContext(MainContext);
   // const [updatedTask, setUpdatedTask] = useState({
   //   taskName: '',
   //   due: '',
   //   isPriority: updatedTask.isPriority,
   // });
-
   useEffect(() => {
     getTasks();
   }, []);
 
-  // const deleteNote = async (id) => {
-  //   try {
-  //     const noteDoc = doc(db, 'notes', id);
-  //     await deleteDoc(noteDoc);
-  //     console.log('note deleted', id);
-  //     getNotes();
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  const deleteNote = async (id) => {
+    try {
+      const taskDoc = doc(db, 'tasks', id);
+      await deleteDoc(taskDoc);
+      console.log('task deleted', id);
+      getTasks();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-  // const updateNote = async (id) => {
-  //   try {
-  //     const noteDoc = doc(db, 'notes', id);
-  //     await updateDoc(noteDoc, {
-  //       title: updatedNotes.title,
-  //       body: updatedNotes.body,
-  //     });
+  // const toggleEditModalForTask = (id) => {
+  //   if (id === id) {
   //     setEditNoteModal({
-  //       decider: false,
+  //       id: id,
+  //       decider: !editNoteModal.decider,
   //     });
 
-  //     getNotes();
-  //   } catch (err) {
-  //     console.error(err);
+  //     getNotes(id);
   //   }
   // };
+
   return (
     <div className="w-full">
       <div className="flex items-center h-20 border-2 border-teal-400 p-2">
@@ -55,9 +52,23 @@ const Tasks = () => {
             getTasks(task.id);
             return (
               <div key={task.id}>
+                <Menu
+                  id={task.id}
+                  toggleMenu={toggleEditMenu}
+                  deleteNote={deleteNote}
+                  toggleEditModal={toggleEditModal}
+                  title="tasks"
+                />
                 <h1>{task.taskName}</h1>
                 <h1>{task.due}</h1>
-                <h1>{task.isPriority}</h1>
+                <h1>{task.isPriority} dasda</h1>
+
+                <EditTaskModal
+                  taskID={task.id}
+                  taskName={task.taskName}
+                  taskDue={task.due}
+                  taskPriority={task.isPriority}
+                />
               </div>
             );
           })}

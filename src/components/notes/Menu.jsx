@@ -3,7 +3,7 @@ import { MainContext } from '../../context/MainContext';
 import { BsThreeDots, BsTrash } from 'react-icons/bs';
 import { MdOutlineEditNote } from 'react-icons/md';
 
-const Menu = ({ deleteNote, toggleMenu, id }) => {
+const Menu = ({ deleteNote, toggleMenu, id, title }) => {
   const { openMenu, toggleEditModal } = useContext(MainContext);
   return (
     <>
@@ -14,7 +14,7 @@ const Menu = ({ deleteNote, toggleMenu, id }) => {
         <div className="flex justify-center items-center flex-col rounded-md absolute right-10 top-12 w-24 h-20 p-2 border-2 bg-violet-100 border-violet-500">
           <button
             className="flex justify-center items-center hover:text-violet-500"
-            onClick={() => toggleEditModal(id)}
+            onClick={() => toggleEditModal(id, title)}
           >
             <MdOutlineEditNote className="text-xl mr-1" /> edit
           </button>

@@ -44,7 +44,6 @@ function App() {
     id: null,
     decider: false,
   });
-
   const [openMenu, setOpenMenu] = useState({
     id: null,
     decider: false,
@@ -52,6 +51,17 @@ function App() {
 
   // task
   const [task, setTask] = useState([]);
+
+  const [editTaskModal, setEditTaskModal] = useState({
+    id: null,
+    decider: false,
+  });
+
+  const [updatedTask, setUpdatedTask] = useState({
+    taskName: '',
+    due: '',
+    isPriority: null,
+  });
 
   useEffect(() => {
     const checkIfLoggedIn = auth.onAuthStateChanged((user) => {
@@ -136,7 +146,7 @@ function App() {
     }
   };
 
-  const updateNote = async (id) => {
+  const updateNoteHandle = async (id) => {
     try {
       const noteDoc = doc(db, 'notes', id);
       await updateDoc(noteDoc, {
@@ -162,17 +172,25 @@ function App() {
     }
   };
 
-  const toggleEditModal = (id) => {
+  const toggleEditModal = (id, whatToEdit) => {
     if (id === id) {
-      setEditNoteModal({
-        id: id,
-        decider: !editNoteModal.decider,
-      });
+      if (whatToEdit === 'notes') {
+        setEditNoteModal({
+          id: id,
+          decider: !editNoteModal.decider,
+        });
 
-      getNotes(id);
+        getNotes(id);
+      } else {
+        setEditTaskModal({
+          id: id,
+          decider: !editTaskModal.decider,
+        });
+
+        getTasks(id);
+      }
     }
   };
-
   // task
   const taskCollectionRef = collection(db, 'tasks');
 
@@ -189,12 +207,13 @@ function App() {
           (task) => task.userID === auth?.currentUser?.uid
         );
 
-        // const currentNote = filteredNotes.find((task) => task.id === id);
+        // const currentTask = filteredNotes.find((task) => task.id === id);
 
-        // if (currentNote) {
-        //   setUpdatedNotes({
-        //     title: currentNote.title,
-        //     body: currentNote.body,
+        // if (currentTask) {
+        //   setUpdatedTask({
+        //     taskName: currentTask.taskName,
+        //     due: currentTask.due,
+        //     isPriority: currentTask.isPriority,
         //   });
         // }
 
@@ -205,6 +224,26 @@ function App() {
       }
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const updateTaskHandle = async (id) => {
+    try {
+      const taskDoc = doc(db, 'tasks', id);
+      await updateDoc(taskDoc, {
+        taskName: updatedTask.taskName,
+        isPriority: updatedTask.isPriority,
+        due: updatedTask.due,
+      });
+      setEditTaskModal({
+        decider: false,
+      });
+
+      getTasks();
+
+      console.log(updatedTask.taskName);
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -223,7 +262,7 @@ function App() {
         setNotesStorage,
         getNotes,
         deleteNote,
-        updateNote,
+        updateNoteHandle,
         updatedNotes,
         setUpdatedNotes,
         toggleEditMenu,
@@ -236,6 +275,11 @@ function App() {
         setShowAddTasksModalNotes,
         getTasks,
         task,
+        editTaskModal,
+        setEditTaskModal,
+        updatedTask,
+        setUpdatedTask,
+        updateTaskHandle,
       }}
     >
       <div className="flex flex-col items-center justify-center h-screen w-screen text-center">

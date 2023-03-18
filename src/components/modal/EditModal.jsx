@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { MainContext } from '../../context/MainContext';
 
 const EditModal = ({ noteID, noteTitle, noteBody }) => {
-  const { updatedNotes, updateNote, setUpdatedNotes, editNoteModal } =
+  const { updatedNotes, updateNoteHandle, setUpdatedNotes, editNoteModal } =
     useContext(MainContext);
   return (
     <>
@@ -29,7 +29,7 @@ const EditModal = ({ noteID, noteTitle, noteBody }) => {
               })
             }
           ></textarea>
-          <button onClick={() => updateNote(note.id)}>update</button>
+          <button onClick={() => updateNoteHandle(noteID)}>update</button>
         </div>
       )}
     </>
