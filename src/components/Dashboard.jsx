@@ -9,6 +9,7 @@ import { MainContext } from '../context/MainContext';
 import SideBar from './dashboard/SideBar';
 import AddNotesModal from './modal/AddNotesModal';
 import SideBarRight from './dashboard/SideBarRight';
+import AddTaskModal from './modal/AddTaskModal';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const Dashboard = () => {
       <Outlet />
       <SideBarRight />
       <AddNotesModal />
+      <AddTaskModal />
     </div>
   );
 };

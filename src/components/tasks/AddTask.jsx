@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { AiFillPlusCircle } from 'react-icons/ai';
+import { MainContext } from '../../context/MainContext';
 
 const AddTask = () => {
+  const { showAddTasksModalNotes, setShowAddTasksModalNotes } =
+    useContext(MainContext);
+
   return (
-    <button className="button flex justify-center items-center self-center my-4">
+    <button
+      onClick={() => setShowAddTasksModalNotes(!showAddTasksModalNotes)}
+      className="button self-end flex justify-center items-center  my-4"
+    >
       <AiFillPlusCircle className="font-bold mr-2" />
       Add Task
     </button>

@@ -9,7 +9,6 @@ import SignUp from './components/SignUp';
 import Home from './components/dashboard/Home';
 import Tasks from './components/pages/Tasks';
 import NotesDetails from './components/pages/NotesDetails';
-import NotesDashboard from './components/dashboard/NotesDashboard';
 import Notes from './components/pages/Notes';
 
 import { MainContext } from './context/MainContext';
@@ -25,30 +24,22 @@ import {
 
 import { auth, db } from './config/firebase-config';
 
-import {
-  getRedirectResult,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 function App() {
-  // const {signInWithGoogle, signIn, setEmail, setPassword} = useLogin();
+  // notes
   const { storeFilteredData, setStoreFilteredData } = useUserDetails();
-  // const { getNotes } = useCrud()
-
   const [notesStorage, setNotesStorage] = useState([]);
   const [showAddModalNotes, setShowAddModalNotes] = useState(false);
   const [showAddTasksModalNotes, setShowAddTasksModalNotes] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [storeFiltered, setStoreFiltered] = useState([]);
   const navigate = useNavigate();
-
   const [updatedNotes, setUpdatedNotes] = useState({
     title: '',
     body: '',
   });
-
   const [editNoteModal, setEditNoteModal] = useState({
     id: null,
     decider: false,
@@ -59,7 +50,8 @@ function App() {
     decider: false,
   });
 
-  const [storeFiltered, setStoreFiltered] = useState([]);
+  // task
+  const [task, setTask] = useState([]);
 
   useEffect(() => {
     const checkIfLoggedIn = auth.onAuthStateChanged((user) => {
@@ -99,6 +91,7 @@ function App() {
     }
   };
 
+  // notes
   const notesCollectionRef = collection(db, 'notes');
 
   const getNotes = async (id) => {
@@ -180,6 +173,41 @@ function App() {
     }
   };
 
+  // task
+  const taskCollectionRef = collection(db, 'tasks');
+
+  const getTasks = async (id) => {
+    try {
+      const data = await getDocs(taskCollectionRef);
+      const taskss = data.docs.map((task) => ({
+        ...task.data(),
+        id: task.id,
+      }));
+
+      if (auth?.currentUser?.uid) {
+        const filteredNotes = taskss.filter(
+          (task) => task.userID === auth?.currentUser?.uid
+        );
+
+        // const currentNote = filteredNotes.find((task) => task.id === id);
+
+        // if (currentNote) {
+        //   setUpdatedNotes({
+        //     title: currentNote.title,
+        //     body: currentNote.body,
+        //   });
+        // }
+
+        setTask(filteredNotes);
+        // console.log(currentNote);
+        // setNotesStorage(filteredNotes);
+        // setStoreFiltered(filteredNotes);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <MainContext.Provider
       value={{
@@ -206,6 +234,8 @@ function App() {
         setStoreFiltered,
         showAddTasksModalNotes,
         setShowAddTasksModalNotes,
+        getTasks,
+        task,
       }}
     >
       <div className="flex flex-col items-center justify-center h-screen w-screen text-center">
