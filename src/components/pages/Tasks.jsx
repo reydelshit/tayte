@@ -47,11 +47,14 @@ const Tasks = () => {
       </div>
       <div className="w-full flex flex-col justify-end p-2">
         <AddTask />
-        <div>
+        <div className="grid grid-cols-4 gap-4 border-2 border-orange-400">
           {task.map((task) => {
             getTasks(task.id);
             return (
-              <div key={task.id}>
+              <div
+                className="flex justify-center items-center flex-col relative h-48 border-2 border-orange-500"
+                key={task.id}
+              >
                 <Menu
                   id={task.id}
                   toggleMenu={toggleEditMenu}
